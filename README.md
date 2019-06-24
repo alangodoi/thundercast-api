@@ -35,7 +35,9 @@ DB_PASSWORD=password
 ```
 
 #### Install dependencies
+```bash
 composer install
+```
 
 #### Run the migrations
 ```bash
