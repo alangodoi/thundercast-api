@@ -1,5 +1,14 @@
-## thundercast-api
+## Thundercast API
 
+Create your own Podcast API
+
+#### Clone this repo
+```bash
+cd /your/desired/project/path
+git clone https://github.com/alangodoi/thundercast-api.git
+```
+
+#### Create a database
 ```bash
 mysql -u username -p
 ```
@@ -8,14 +17,14 @@ mysql -u username -p
 CREATE DATABASE databasename
 ```
 
-# Configure .env
+#### Configure .env
 ```bash
-cd /path/to/your/cloned/project
+cd /path/to/your/cloned/project/thundercast
 cp .env.example .env
 vim .env
 ```
 
-
+###### Configure MySQL Connection
 ```PHP
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
@@ -24,5 +33,18 @@ DB_DATABASE=databasename
 DB_USERNAME=username
 DB_PASSWORD=password
 ```
+
+#### Install dependencies
+composer install
+
+#### Run the migrations
+```bash
+php artisan migrate
+```
+
+#### Test
+
+
+
 
 
