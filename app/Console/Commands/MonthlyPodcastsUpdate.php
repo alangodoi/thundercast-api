@@ -43,42 +43,56 @@ class MonthlyPodcastsUpdate extends Command
     {
         $upcoming = Upcoming::all();
 
-        foreach ($upcoming as $podcast) {
-            $savedPodcast = 0;
-            $feed = simplexml_load_file($podcast->feed);
+        header ("Content-Type:text/xml");
+        foreach ($upcoming as $upcoming) {
 
-            // Podcast
-            $podcast = new Podcast([
-                'artistName' => $feed->channel->children("itunes", true)->author,
-                'title'=>$feed->channel->title,
-                'description'=> $feed->channel->description,
-                'link'=> $feed->channel->link,
-                'feed'=> $feed->channel->children("atom", true)->link->attributes(),
-                'artwork'=> $feed->channel->image->url,
-                'copyright' => $feed->channel->copyright
-            ]);
+            try {
 
-            $savedPodcast = $podcast->save();
-            echo "PODCAST\n";
-            echo $podcast->id;
+                $feed = simplexml_load_file($upcoming->feed, 'SimpleXMLElement');
 
-            // Episodes
-            foreach ($feed->channel->item as $item) {
-                $episode = new Episode ([
-                    'title' => $item->title,
-                    'description' => $item->description,
-                    'releaseDate' => $item->pubDate,
-                    'link' => $item->link,
-                    'audioFile' => $item->enclosure['url'],
-                    'length' => $item->enclosure['length'],
-                    'audioFileType' => $item->enclosure['type'],
-                    'podcastId' => $podcast->id
+                // Podcast
+                $podcast = new Podcast([
+                    'artistName' => $feed->channel->children("itunes", true)->author,
+                    'title'=>$feed->channel->title,
+                    'description'=> $feed->channel->description,
+                    'link'=> $feed->channel->link,
+                    'feed'=> $feed->channel->children("atom", true)->link->attributes(),
+                    'artwork' => $feed->channel->children("itunes", true)->image->attributes(), // Some podcasts use better images for itunes
+                    'copyright' => $feed->channel->copyright
                 ]);
 
-                $episode->save();
-                echo "EPISODES\n";
-                echo $episode->id."\n";
+                if ($podcast->save() == 1) {
+                    // Episodes
+                    foreach ($feed->channel->item as $item) {
+                        $episode = new Episode ([
+                            'title' => $item->title,
+                            'description' => $item->description,
+                            // 'releaseDate' => date("Y-d-m", strtotime($item->pubDate)),
+                            'releaseDate' => '2019-05-05',
+                            'link' => $item->link,
+                            'audioFile' => $item->enclosure['url'] != null ? $item->enclosure['url'] : "not found",
+                            'length' => $item->enclosure['length'] != null ? $item->enclosure['length'] : 0,
+                            'audioFileType' => $item->enclosure['type'] != null ? $item->enclosure['type'] : "not found",
+                            'podcastId' => $podcast->id
+                        ]);
+
+                        $episode->save();
+                        echo "EPISODE\n";
+                        echo $episode->id."\n";
+                    }
+
+                    $welcome = Upcoming::find($upcoming->id);
+
+                    $welcome->status = 1;
+                    $welcome->status_desc = "Added";
+
+                    $welcome->save();
+                }
+
+            } catch (Exception $e) {
+                echo $e;
             }
+
         }
 
     }

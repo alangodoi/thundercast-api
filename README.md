@@ -44,13 +44,17 @@ composer install
 php artisan migrate
 ```
 
-#### Test
+#### How To
+
+Insert xml feed urls into table `upcomings` then run the laravel command below, this will fill the tables podcasts and episodes
+
+```bash
+php artisan podcast:update
+```
 
 ---
 ## Authors
 * **Alan Godoi** - *Initial work* - [AlanGodoi](https://github.com/alangodoi)
 
-
 ## License
-
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details

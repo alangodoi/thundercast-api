@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTablePodcastEpisodes extends Migration
+class CreateTableEpisodes extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,15 @@ class CreateTablePodcastEpisodes extends Migration
      */
     public function up()
     {
-        Schema::create('podcast_episodes', function (Blueprint $table) {
+        Schema::create('episodes', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name');
-            $table->integer('number');
-            $table->string('description');
+            $table->string('title');
+            $table->longText('description');
             $table->date('releaseDate');
+            $table->string('link');
+            $table->string('audioFile');
+            $table->bigInteger('length');
+            $table->string('audioFileType');
             $table->bigInteger('podcastId')->unsigned();
             $table->timestamps();
             $table->foreign('podcastId')->references('id')->on('podcasts');
@@ -32,6 +35,6 @@ class CreateTablePodcastEpisodes extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('podcast_episodes');
+        Schema::dropIfExists('episodes');
     }
 }
