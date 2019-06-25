@@ -57,6 +57,14 @@ class CreateTableUpcomings extends Migration
 
          DB::table('upcomings')->insert(
             array(
+                'feed' => 'https://feeds.megaphone.fm/thechernobylpodcast',
+                'status' => 0,
+                'status_desc' => 'not added'
+            )
+         );
+
+         DB::table('upcomings')->insert(
+            array(
                 'feed' => 'http://feeds.revealradio.org/revealpodcast',
                 'status' => 0,
                 'status_desc' => 'not added'
