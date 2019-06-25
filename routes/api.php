@@ -17,6 +17,7 @@ use Illuminate\Http\Request;
 //     return $request->user();
 // });
 
+Route::get('/upcoming', 'PodcastController@upcoming');
 Route::get('/podcasts', 'PodcastController@podcasts');
 Route::get('/episodes', 'PodcastController@episodes');
 

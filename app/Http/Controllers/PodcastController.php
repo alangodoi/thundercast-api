@@ -3,11 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Upcoming;
 use App\Podcast;
 use App\Episode;
 
 class PodcastController extends Controller
 {
+    public function upcoming() {
+        Return Upcoming::all();
+    }
+
     public function insertPodcast(Request $request) {
 
     }
