@@ -58,12 +58,12 @@ class MonthlyPodcastsUpdate extends Command
 
                     // Add Podcast
                     $newPodcast = new Podcast([
-                        'artistName' => $feed->channel->children("itunes", true)->author,
+                        'artistName' => $feed->channel->children("itunes", true)->author != null ? $feed->channel->children("itunes", true)->author : "not found",
                         'title'=>$feed->channel->title,
                         'description'=> $feed->channel->description,
                         'link'=> $feed->channel->link,
-                        'feed'=> $feed->channel->children("atom", true)->link->attributes(),
-                        'artwork' => $feed->channel->children("itunes", true)->image->attributes(), // Some podcasts use better images for itunes
+                        'feed'=> $feed->channel->children("atom", true)->link ? $feed->channel->children("atom", true)->link->attributes() : "not found",
+                        'artwork' => $feed->channel->children("itunes", true)->image ? $feed->channel->children("itunes", true)->image->attributes() : "not found", // Some podcasts use better images for itunes
                         'copyright' => $feed->channel->copyright
                     ]);
 
@@ -87,7 +87,7 @@ class MonthlyPodcastsUpdate extends Command
                         // Check if the episode is already in database
                         if ($ep > 0) {
                             // Skip to the next iteration
-                            echo "\n\nWhoops! It's already in database! :)\n\n";
+                            echo "Whoops! It's already in database! :)\n";
                             continue;
                         }
 
@@ -116,7 +116,7 @@ class MonthlyPodcastsUpdate extends Command
                         $welcome->save();
                     }
 
-                    echo "\n\nDone! :D\n\n";
+                    echo "Done! :D\n\n";
                 }
 
             } catch (Exception $e) {

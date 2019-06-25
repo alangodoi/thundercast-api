@@ -24,6 +24,63 @@ class CreateTableUpcomings extends Migration
         // Insere Podcast
         DB::table('upcomings')->insert(
             array(
+                'feed' => 'http://rss.art19.com/the-daily',
+                'status' => 0,
+                'status_desc' => 'not added'
+            )
+         );
+
+         DB::table('upcomings')->insert(
+            array(
+                'feed' => 'https://www.kcrw.com/news/shows/left-right-center/rss.xml',
+                'status' => 0,
+                'status_desc' => 'not added'
+            )
+         );
+
+         DB::table('upcomings')->insert(
+            array(
+                'feed' => 'https://www.democracynow.org/podcast.xml',
+                'status' => 0,
+                'status_desc' => 'not added'
+            )
+         );
+
+        //  Node no longer exists
+         DB::table('upcomings')->insert(
+            array(
+                'feed' => 'http://feeds.wnyc.org/takeawaypodcast',
+                'status' => 0,
+                'status_desc' => 'not added'
+            )
+         );
+
+         DB::table('upcomings')->insert(
+            array(
+                'feed' => 'http://feeds.revealradio.org/revealpodcast',
+                'status' => 0,
+                'status_desc' => 'not added'
+            )
+         );
+
+         DB::table('upcomings')->insert(
+            array(
+                'feed' => 'http://feeds.feedburner.com/TheTerryProjectPodcast',
+                'status' => 0,
+                'status_desc' => 'not added'
+            )
+         );
+
+         DB::table('upcomings')->insert(
+            array(
+                'feed' => 'http://audioboom.com/channels/3709182.rss',
+                'status' => 0,
+                'status_desc' => 'not added'
+            )
+         );
+
+        DB::table('upcomings')->insert(
+            array(
                 'feed' => 'http://hipsters.tech/feed/podcast/',
                 'status' => 0,
                 'status_desc' => 'not added'

@@ -17,11 +17,11 @@ class CreateTablePodcasts extends Migration
             $table->bigIncrements('id');
             $table->string('artistName');
             $table->string('title');
-            $table->string('description');
+            $table->longText('description');
             $table->string('link');
             $table->string('feed');
             $table->string('artwork');
-            $table->string('copyright');
+            $table->longText('copyright');
             $table->timestamps();
         });
     }
