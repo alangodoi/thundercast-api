@@ -18,4 +18,5 @@ use Illuminate\Http\Request;
 // });
 
 Route::get('/podcasts', 'PodcastController@podcasts');
+Route::get('/episodes', 'PodcastController@episodes');
 
