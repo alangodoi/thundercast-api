@@ -52,6 +52,14 @@ Insert xml feed urls into table `upcomings` then run the laravel command below, 
 php artisan podcast:update
 ```
 
+* When you run the migrations, some urls will be added by default, see the [code](database/migrations/2019_06_25_013903_create_table_upcomings.php)
+
+##### Routes
+
+    GET api/upcoming
+    GET api/podcasts
+    GET api/episodes
+
 ---
 ## Authors
 * **Alan Godoi** - *Initial work* - [AlanGodoi](https://github.com/alangodoi)
