@@ -19,8 +19,8 @@ class CreateTableEpisodes extends Migration
             $table->longText('description');
             $table->string('duration');
             $table->date('releaseDate');
-            $table->string('link');
-            $table->string('audioFile');
+            $table->longText('link');
+            $table->longText('audioFile');
             $table->bigInteger('length');
             $table->string('audioFileType');
             $table->bigInteger('podcastId')->unsigned();

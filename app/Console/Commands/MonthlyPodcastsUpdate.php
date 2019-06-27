@@ -52,6 +52,13 @@ class MonthlyPodcastsUpdate extends Command
 
                 $feed = simplexml_load_file($upcmng->feed, 'SimpleXMLElement');
 
+                // $xml = simplexml_load_file($file, null, LIBXML_NOERROR);
+
+                if ($feed === false) {
+                    echo "Algo deu errado ao abrir o arquivo! :(";
+                    continue;
+                }
+
                 // Check if this Podcast was added previously
                 if ($upcmng->status == 0) {
                     echo "\nWelcome to the jungle!\n";
@@ -74,7 +81,6 @@ class MonthlyPodcastsUpdate extends Command
 
                     $urlFeed = preg_replace("(^https?://)", "", $upcmng->feed);
                     $oldPodcastId = Podcast::where('feed', '=', "https://" . $urlFeed)->orWhere('feed', '=', "http://" . $urlFeed)->value('id');
-
                 }
 
                 // Check if the new podcast was added or retrieved from database
@@ -99,7 +105,7 @@ class MonthlyPodcastsUpdate extends Command
                             'duration' => $item->children("itunes", true)->duration ? $item->children("itunes", true)->duration : "not found",
                             'link' => $item->link,
                             'audioFile' => $item->enclosure['url'] != null ? $item->enclosure['url'] : "not found",
-                            'length' => $item->enclosure['length'] != null ? $item->enclosure['length'] : 0,
+                            'length' => $item->enclosure['length'] != null ? (preg_match('/^[0-9]+$/i', $item->enclosure['length']) ? $item->enclosure['length'] : 0) : 0,
                             'audioFileType' => $item->enclosure['type'] != null ? $item->enclosure['type'] : "not found",
                             'podcastId' => $saved == 1 ? $newPodcast->id : $oldPodcastId
                         ]);
@@ -122,6 +128,7 @@ class MonthlyPodcastsUpdate extends Command
 
             } catch (Exception $e) {
                 echo $e;
+                continue;
             }
 
         }
