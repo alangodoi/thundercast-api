@@ -9,6 +9,7 @@ class Episode extends Model
     protected $fillable = [
         'title',
         'description',
+        'duration',
         'releaseDate',
         'link',
         'audioFile',

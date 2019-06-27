@@ -97,7 +97,7 @@ class CreateTableUpcomings extends Migration
 
          DB::table('upcomings')->insert(
             array(
-                'feed' => 'https://oprimorico.com.br/feed/',
+                'feed' => 'https://oprimorico.com.br/category/podcast/feed/',
                 'status' => 0,
                 'status_desc' => 'not added'
             )

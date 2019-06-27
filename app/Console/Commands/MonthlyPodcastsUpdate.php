@@ -96,6 +96,7 @@ class MonthlyPodcastsUpdate extends Command
                             'title' => $item->title,
                             'description' => $item->description,
                             'releaseDate' => new \DateTime(date('Y-m-d', strtotime($item->pubDate))),
+                            'duration' => $item->children("itunes", true)->duration ? $item->children("itunes", true)->duration : "not found",
                             'link' => $item->link,
                             'audioFile' => $item->enclosure['url'] != null ? $item->enclosure['url'] : "not found",
                             'length' => $item->enclosure['length'] != null ? $item->enclosure['length'] : 0,

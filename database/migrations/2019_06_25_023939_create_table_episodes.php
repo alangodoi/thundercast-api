@@ -17,6 +17,7 @@ class CreateTableEpisodes extends Migration
             $table->bigIncrements('id');
             $table->string('title');
             $table->longText('description');
+            $table->string('duration');
             $table->date('releaseDate');
             $table->string('link');
             $table->string('audioFile');
