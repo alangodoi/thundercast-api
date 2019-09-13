@@ -44,6 +44,11 @@ composer install
 php artisan migrate
 ```
 
+#### Generate key
+```bash
+php artisan key:generate
+```
+
 #### How To
 
 Insert xml feed urls into table `upcomings` then run the laravel command below, this will fill the tables podcasts and episodes
@@ -54,7 +59,6 @@ php artisan podcast:update
 
 * When you run the migrations, some urls will be added by default, see the [code](database/migrations/2019_06_25_013903_create_table_upcomings.php)
 
-###### Use the command `php artisan podcast:update` 
 
 ##### Routes
 
