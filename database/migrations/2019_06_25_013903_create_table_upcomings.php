@@ -41,6 +41,8 @@ class CreateTableUpcomings extends Migration
             "https://halfdeaf.com.br/show/2987926/episodes/feed",
             "http://feeds.feedburner.com/TEDTalks_audio",
             "http://feeds.feedburner.com/papodegordo",
+            "https://anchor.fm/s/d626e04/podcast/rss",
+            "https://anchor.fm/s/9789fe8/podcast/rss",
             // "https://feeds.megaphone.fm/lore",
             // "http://feeds.feedburner.com/papricast",
             // "https://www.npr.org/rss/podcast.php?id=344098539",
